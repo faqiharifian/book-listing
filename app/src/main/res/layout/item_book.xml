@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_book_height"
+    android:clickable="true"
+    android:foreground="?android:selectableItemBackground"
+    app:cardCornerRadius="@dimen/default_card_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/image_book"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/image_bg"
+            android:scaleType="centerCrop"/>
+
+        <ProgressBar
+            android:id="@+id/progress_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="false"
+            android:progress="0"/>
+
+        <TextView
+            android:id="@+id/text_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/text_book_author"
+            android:background="#c8000000"
+            android:paddingTop="@dimen/default_space"
+            android:paddingLeft="@dimen/default_space"
+            android:paddingRight="@dimen/default_space"
+            android:textColor="@android:color/white"
+            android:maxLines="2"
+            tools:text="TITLE"/>
+
+        <TextView
+            android:id="@+id/text_book_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c8000000"
+            android:paddingBottom="@dimen/default_space"
+            android:paddingLeft="@dimen/default_space"
+            android:paddingRight="@dimen/default_space"
+            android:layout_alignParentBottom="true"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:maxLines="2"
+            tools:text="SOMETHING"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
