@@ -12,6 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:background="@color/colorPrimary"
         android:elevation="0dp"
         android:theme="@style/Base.ThemeOverlay.AppCompat.Dark"
@@ -34,6 +35,15 @@
         android:gravity="center"
         android:padding="@dimen/default_space"
         android:text="@string/error_empty"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/text_error_server"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="@dimen/default_space"
+        android:text="@string/error_server"
         android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView

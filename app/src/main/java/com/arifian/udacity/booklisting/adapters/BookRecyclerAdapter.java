@@ -69,8 +69,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(book.getLink()));
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(book.getLink()));
                 context.startActivity(i);
             }
         });

@@ -19,21 +19,31 @@ public class JSONUtils {
 
         try{
             JSONObject rootJson = new JSONObject(jsonString);
-            JSONArray itemsJson = rootJson.getJSONArray("items");
-            for(int i = 0; i < itemsJson.length(); i++){
-                JSONObject itemJson = itemsJson.getJSONObject(i);
+            if(rootJson.has("items")) {
+                JSONArray itemsJson = rootJson.getJSONArray("items");
+                for (int i = 0; i < itemsJson.length(); i++) {
+                    JSONObject itemJson = itemsJson.getJSONObject(i);
 
-                JSONObject volumeInfoJson = itemJson.getJSONObject("volumeInfo");
-                String title = volumeInfoJson.getString("title");
-                String[] authors = getAuthors(volumeInfoJson.getJSONArray("authors"));
-                JSONObject imageLinksJson = volumeInfoJson.getJSONObject("imageLinks");
-                String thumbnail = imageLinksJson.getString("thumbnail");
+                    JSONObject volumeInfoJson = itemJson.getJSONObject("volumeInfo");
+                    String title = volumeInfoJson.getString("title");
 
-                JSONObject accessInfoJson = itemJson.getJSONObject("accessInfo");
-                String link = accessInfoJson.getString("webReaderLink");
+                    String[] authors = new String[0];
+                    if (volumeInfoJson.has("authors")) {
+                        authors = getAuthors(volumeInfoJson.getJSONArray("authors"));
+                    }
 
-                Book book = new Book(title, link, thumbnail, authors);
-                books.add(book);
+                    String thumbnail = "";
+                    if (volumeInfoJson.has("imageLinks")) {
+                        JSONObject imageLinksJson = volumeInfoJson.getJSONObject("imageLinks");
+                        thumbnail = imageLinksJson.getString("thumbnail");
+                    }
+
+                    JSONObject accessInfoJson = itemJson.getJSONObject("accessInfo");
+                    String link = accessInfoJson.getString("webReaderLink");
+
+                    Book book = new Book(title, link, thumbnail, authors);
+                    books.add(book);
+                }
             }
         }catch(JSONException je){
             je.printStackTrace();
