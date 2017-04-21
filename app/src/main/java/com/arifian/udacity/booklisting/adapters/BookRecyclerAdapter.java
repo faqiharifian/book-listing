@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,9 +27,9 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     List<Book> books;
     Context context;
 
-    public BookRecyclerAdapter(Context context, List<Book> books) {
-        this.books = books;
+    public BookRecyclerAdapter(Context context) {
         this.context = context;
+        books = new ArrayList<>();
     }
 
     @Override
@@ -57,7 +58,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
 
             @Override
             public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
-                ((ViewGroup) holder.bookProgressBar.getParent()).removeView(holder.bookProgressBar);
+                holder.bookProgressBar.setVisibility(View.GONE);
                 return false;
             }
         }).into(holder.bookImageView);
@@ -66,6 +67,11 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     @Override
     public int getItemCount() {
         return books.size();
+    }
+
+    public void setBooks(List<Book> data) {
+        books = data;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
