@@ -1,6 +1,8 @@
 package com.arifian.udacity.booklisting.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +42,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Book book = books.get(position);
+        final Book book = books.get(position);
         holder.titleBookTextView.setText(book.getTitle());
 
         String authors = "";
@@ -53,6 +55,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
         Glide.with(context).load(book.getThumbnail()).listener(new RequestListener<String, GlideDrawable>() {
             @Override
             public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                holder.bookProgressBar.setVisibility(View.GONE);
                 return false;
             }
 
@@ -62,6 +65,15 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
                 return false;
             }
         }).into(holder.bookImageView);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(book.getLink()));
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
